@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/graphql-date-type
+    docker:
+      - image: circleci/node:8.0.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Test
+          command: yarn test

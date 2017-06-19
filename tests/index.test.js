@@ -1,7 +1,7 @@
 /*  eslint-env jest */
 
 import { Kind } from 'graphql/language';
-import GraphQLDate from './index';
+import GraphQLDate from '../src/index';
 
 describe('GraphQLDate', () => {
   describe('serialize', () => {

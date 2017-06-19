@@ -1,12 +1,14 @@
 {
   "name": "graphql-date-type",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Natthakit Susanthitanon <ns@storylog.co>",
   "license": "MIT",
   "scripts": {
+    "build": "babel src -d dist --plugins transform-es2015-modules-commonjs",
     "lint": "eslint .",
-    "pretest": "eslint .",
+    "postinstall": "yarn run build",
+    "pretest": "yarn run lint",
     "test": "jest --coverage --forceExit --runInBand",
     "test:watch": "jest --watch"
   },
@@ -14,6 +16,9 @@
     "testEnvironment": "node",
     "coverageReporters": [
       "html"
+    ],
+    "roots": [
+      "<rootDir>/tests"
     ],
     "testMatch": [
       "**/?(*.)(spec|test).js?(x)"

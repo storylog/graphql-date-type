@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/graphql-date-type
     docker:
-      - image: circleci/node:8.0.0
+      - image: circleci/node:8.1.2
     steps:
       - checkout
       - run:

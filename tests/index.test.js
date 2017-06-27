@@ -5,13 +5,13 @@ import GraphQLDate from '../src/index';
 
 describe('GraphQLDate', () => {
   describe('serialize', () => {
-    it('can serialize Date value', () => {
+    it('should serialize Date value', () => {
       const date = new Date();
 
       expect(GraphQLDate.serialize(date)).toBe(date.getTime());
     });
 
-    it('can serialize timestamp value', () => {
+    it('should serialize timestamp value', () => {
       const date = new Date();
 
       expect(GraphQLDate.serialize(date.getTime())).toBe(date.getTime());
@@ -19,7 +19,7 @@ describe('GraphQLDate', () => {
   });
 
   describe('parseValue', () => {
-    it('can parse value to Date', () => {
+    it('should parse value to Date', () => {
       const date = new Date();
 
       expect(GraphQLDate.parseValue(date.getTime())).toBeInstanceOf(Date);
@@ -31,7 +31,7 @@ describe('GraphQLDate', () => {
   });
 
   describe('parseLiteral', () => {
-    it('can parse ast literal', () => {
+    it('should parse ast literal', () => {
       const ast = {
         kind: Kind.INT,
         value: (new Date()).getTime(),

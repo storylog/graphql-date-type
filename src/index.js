@@ -5,18 +5,34 @@ export default new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
   parseValue(value) {
-    return (new Date(value)).toISOString();
+    try {
+      return (new Date(value)).toISOString();
+    } catch (error) {
+      throw new TypeError(
+        `Cannot represent an invalid Date instance ${JSON.stringify(value)}`
+      );
+    }
   },
   parseLiteral(ast) {
-    if (ast.kind === _language.Kind.INT) {
-      return (new Date(parseInt(ast.value, 10))).toISOString();
+    try {
+      if (ast.kind === _language.Kind.INT) {
+        return (new Date(parseInt(ast.value, 10))).toISOString();
+      }
+      return null;
+    } catch (error) {
+      throw new TypeError(
+        `Cannot represent an invalid Date instance ${JSON.stringify(ast)}`
+      );
     }
-
-    return null;
   },
   serialize(value) {
-    if (!value || !value.getTime) return value;
-
-    return value.toISOString();
+    try {
+      if (!value || !value.getTime) return value;
+      return value.toISOString();
+    } catch (error) {
+      throw new TypeError(
+        `Cannot represent an invalid Date instance ${JSON.stringify(value)}`
+      );
+    }
   },
 });

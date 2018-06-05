@@ -1,6 +1,6 @@
 {
   "name": "graphql-date-type",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "author": "Natthakit Susanthitanon <ns@storylog.co>",
   "license": "MIT",

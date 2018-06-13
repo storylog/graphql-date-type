@@ -27,8 +27,8 @@ export default new GraphQLScalarType({
   },
   serialize(value) {
     try {
-      if (!value || !value.getTime) return value;
-      return value.toISOString();
+      if (!value) return value;
+      return (new Date(value)).toISOString();
     } catch (error) {
       throw new TypeError(
         `Cannot represent an invalid Date instance ${JSON.stringify(value)}`

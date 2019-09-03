@@ -7,6 +7,7 @@
   "scripts": {
     "build:clean": "rm -rf dist",
     "build": "babel src -d dist --ignore '**/*.spec.js'",
+    "install": "yarn build:clean && yarn build",
     "lint": "eslint .",
     "test": "jest",
     "test:watch": "jest --watch"

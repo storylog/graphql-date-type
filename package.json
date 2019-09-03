@@ -1,38 +1,37 @@
 {
   "name": "graphql-date-type",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "author": "Natthakit Susanthitanon <ns@storylog.co>",
   "license": "MIT",
   "scripts": {
-    "build": "babel src -d dist --plugins transform-es2015-modules-commonjs",
+    "build:clean": "rm -rf dist",
+    "build": "babel src -d dist --ignore '**/*.spec.js'",
+    "install": "yarn build:clean && yarn build",
     "lint": "eslint .",
-    "install": "yarn run build",
-    "pretest": "yarn run lint",
-    "test": "jest --coverage --forceExit --runInBand",
+    "test": "jest",
     "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "graphql": "^14.5.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.3.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "jest-matcher-utils": "^24.9.0"
   },
   "jest": {
     "testEnvironment": "node",
-    "coverageReporters": [
-      "html"
-    ],
     "roots": [
-      "<rootDir>/tests"
+      "<rootDir>/src"
     ],
     "testMatch": [
-      "**/?(*.)(spec|test).js?(x)"
+      "**/*.spec.js"
     ]
-  },
-  "dependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "graphql": "^0.10.1"
-  },
-  "devDependencies": {
-    "eslint": "3.19.0",
-    "eslint-config-storylog": "https://github.com/storylog/eslint-config-storylog.git",
-    "jest": "^20.0.4",
-    "jest-cli": "^20.0.4"
   }
 }

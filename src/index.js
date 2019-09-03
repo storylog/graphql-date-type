@@ -1,38 +1,37 @@
-import { GraphQLScalarType } from 'graphql';
-import { Kind } from 'graphql/language';
+import { GraphQLScalarType, Kind } from 'graphql';
+
+function errorMessage(value) {
+  return `Cannot represent an invalid Date instance ${JSON.stringify(value)}`;
+}
+
+function parseDate(value) {
+  const date = new Date(value);
+
+  if (isNaN(date)) {
+    throw new TypeError(errorMessage(value));
+  }
+
+  return date;
+}
 
 export default new GraphQLScalarType({
   name: 'Date',
-  description: 'Date custom scalar type',
-  parseValue(value) {
-    try {
-      return (new Date(value)).toISOString();
-    } catch (error) {
-      throw new TypeError(
-        `Cannot represent an invalid Date instance ${JSON.stringify(value)}`
-      );
-    }
-  },
-  parseLiteral(ast) {
-    try {
-      if (ast.kind === _language.Kind.INT) {
-        return (new Date(parseInt(ast.value, 10))).toISOString();
-      }
-      return null;
-    } catch (error) {
-      throw new TypeError(
-        `Cannot represent an invalid Date instance ${JSON.stringify(ast)}`
-      );
-    }
-  },
+  description: 'Date string in ISO format',
   serialize(value) {
     try {
-      if (!value) return value;
       return (new Date(value)).toISOString();
     } catch (error) {
-      throw new TypeError(
-        `Cannot represent an invalid Date instance ${JSON.stringify(value)}`
-      );
+      throw new TypeError(errorMessage(value));
     }
+  },
+  parseValue(value) {
+    return parseDate(value);
+  },
+  parseLiteral(ast) {
+    if (ast.kind === Kind.STRING) {
+      return parseDate(ast.value);
+    }
+
+    throw new TypeError(errorMessage(ast));
   },
 });

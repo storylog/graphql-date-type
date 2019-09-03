@@ -1,9 +1,9 @@
-# graphql-date-type
+# GraphQL Date Type
 
 Install
 
 ```
-yarn add https://github.com/storylog/graphql-date-type.git
+yarn add https://github.com/storylog/graphql-date-type
 ```
 
 Usage
